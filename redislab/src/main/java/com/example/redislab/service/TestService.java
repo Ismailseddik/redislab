@@ -21,6 +21,13 @@ public class TestService {
 
     @Cached(key = "user:#id", ttl=120)
     public Optional<User> getUserById(Long id) {
+        try {
+            // Simulate long operation
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         return userRepository.findById(id);
-}
+    }
 }
